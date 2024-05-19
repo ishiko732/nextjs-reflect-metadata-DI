@@ -1,5 +1,4 @@
-import { InitService } from "./init.service";
-import { Constructor } from "./decorated";
+import { Constructor } from "./decorators";
 
 export class Factory {
   static create<T>(target: Constructor<T>): T {
@@ -16,11 +15,14 @@ export class Factory {
     return new target(...args);
   }
 
-
-
-  static init() {
+  // maybe use loadable-components?
+  static init<T>(mod: Constructor<T>) {
     console.debug("init factory");
-    Factory.create(InitService).init();
+    const modules: Function[] | undefined = Reflect.getMetadata("module", mod);
+    if (!modules) {
+      throw new Error("Target is not module");
+    }
+    console.log(modules);
     // console.log(Factory.cache_L1);
     console.debug("end init factory");
   }

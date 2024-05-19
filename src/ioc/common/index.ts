@@ -1,3 +1,2 @@
-export * from "./decorated";
+export * from "./decorators";
 export * from "./factory";
-export * from "./register";
