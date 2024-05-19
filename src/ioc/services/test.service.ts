@@ -8,6 +8,7 @@ export class TestService1 {
 
   testMethod() {
     console.log("test1");
+    return "Hello World";
   }
 }
 
@@ -19,5 +20,6 @@ export class TestService2 {
 
   testMethod() {
     console.log("test2");
+    return "Hello World";
   }
 }

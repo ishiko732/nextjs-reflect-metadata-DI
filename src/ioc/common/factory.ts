@@ -34,4 +34,20 @@ export class Factory {
     console.log(this.cache_L1);
     console.debug("end init factory");
   }
+
+  static get<T>(target: Constructor<T>): T {
+    const isInjectable = Reflect.getMetadata("injectable", target);
+    if (!isInjectable) {
+      throw new Error("Target is not injectable");
+    }
+    const instance = this.cache_L1.get(isInjectable);
+    if (!instance) {
+      throw new Error("Instance not found");
+    }
+    return instance;
+  }
+
+  static getBean<T>(serviceName: string, target?: Constructor<T>): T {
+    return this.cache_L1.get(serviceName) as T;
+  }
 }
